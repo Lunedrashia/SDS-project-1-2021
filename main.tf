@@ -289,48 +289,6 @@ resource "aws_iam_user_policy" "buck_ro" {
     })
 }
 
-# Disclaimer: this part and scripts are applied from https://github.com/kaisoz/terraform-nextcloud-ec2-rds-s3 
-# data "template_cloudinit_config" "nextcloud-init" {
-#     gzip          = false
-#     base64_encode = false
-#     part {
-#         content_type = "text/x-shellscript"
-#         content = templatefile("instance-scripts/nextcloud1.sh", {})
-#     }
-#     part {
-#         content_type = "text/x-shellscript"
-#         content = templatefile("instance-scripts/s3.sh", {
-#             aws_region = var.region,
-#             s3_bucket_name = var.bucket_name,
-#             user_access_key = aws_iam_access_key.buck.id,
-#             user_secret_key = aws_iam_access_key.buck.secret
-#         })
-#     }
-#     part {
-#         content_type = "text/x-shellscript"
-#         content = templatefile("instance-scripts/nextcloud2.sh", {})
-#     }
-#     part {
-#         content_type = "text/x-shellscript"
-#         content = templatefile("instance-scripts/nextcloud3.sh", {
-#             database_name = var.database_name,
-#             database_user = var.database_user,
-#             database_pass = var.database_pass,
-#             database_adr = aws_network_interface.db_between.private_ip,
-#             admin_user = var.admin_user,
-#             admin_pass = var.admin_pass,
-#         })
-#     }
-#     part {
-#         content_type = "text/x-shellscript"
-#         content = templatefile("instance-scripts/nextcloud4.sh", {})
-#     }
-# }
-
-# output "run_yourself" {
-#     value = data.template_file.nextcloud-init.rendered
-# }
-
 output "ip" {
     value = aws_instance.app.public_ip
 }
